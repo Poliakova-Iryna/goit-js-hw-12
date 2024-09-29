@@ -115,6 +115,11 @@ body {
   transform: scale(1.05);
 }
 
+.btn-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .load-more-btn {
   border-radius: 8px;
   padding: 8px 16px;
@@ -126,6 +131,7 @@ body {
   line-height: 150%;
   letter-spacing: 0.04em;
   color: #fff;
+  display: inline-block;
 }
 
 .load-more-btn:hover {
