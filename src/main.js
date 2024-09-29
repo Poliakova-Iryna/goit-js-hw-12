@@ -39,7 +39,7 @@ async function handleSubmit(event) {
         if(totalHits > PER_PAGE) {
             refs.loadMoreBtn.classList.remove('is-hidden');
         }
-        lightbox = new SimpleLightbox('.js-gallery a', { 
+        const lightbox = new SimpleLightbox('.js-gallery a', { 
             captionsData: 'alt', 
             captionDelay: 250 
         });
