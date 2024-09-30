@@ -6,6 +6,11 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import axios from "axios";
 
+const lightbox = new SimpleLightbox('.js-gallery a', { 
+    captionsData: 'alt', 
+    captionDelay: 250 
+});
+
 
 let currentPage = 1;
 let searchQuery = null;
@@ -39,16 +44,17 @@ async function handleSubmit(event) {
         if(totalHits > PER_PAGE) {
             refs.loadMoreBtn.classList.remove('is-hidden');
         }
-        const lightbox = new SimpleLightbox('.js-gallery a', { 
-            captionsData: 'alt', 
-            captionDelay: 250 
-        });
-    }
-    catch (error) {}
-
-    finally {
+        lightbox;
         form.reset();
-    }  
+
+    }
+    catch (error) {
+        iziToast.error({
+            title: 'Error',
+            message: 'Something went wrong',
+            position: 'topRight',
+        })
+    }
 
 }
 
@@ -64,7 +70,7 @@ async function handleLoadMore() {
 
         lightbox.refresh();
         
-        if (currentPage >= Math.min(pages, 34)) {
+        if (currentPage >= Math.min(pages, 33)) {
             refs.loadMoreBtn.classList.add('is-hidden');
             iziToast.error({
                 title: 'Error',
@@ -80,7 +86,7 @@ async function handleLoadMore() {
 }
 
 function handleScrollView() {
-    const lastHit = refs.container.lastElementChild;
+    const lastHit = refs.gallery.lastElementChild;
     const hitHeight = lastHit.getBoundingClientRect().height;
     const scrollHeight = hitHeight * 2;
 
