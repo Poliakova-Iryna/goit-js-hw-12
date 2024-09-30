@@ -44,8 +44,8 @@ async function handleSubmit(event) {
         if(totalHits > PER_PAGE) {
             refs.loadMoreBtn.classList.remove('is-hidden');
         }
-        lightbox;
         form.reset();
+        lightbox.refresh();
 
     }
     catch (error) {
