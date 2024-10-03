@@ -18,21 +18,26 @@ export async function fetchImags(searchQuery, currentPage = 1) {
     });
 
     const url = `${BASE_URL}?key=${API_KEY}&${options}`;
+    
 
     const { data: {hits, totalHits}, request: {status} } = await axios.get(url);
 
     if(status !== 200) {
+        refs.loadMoreBtn.classList.add('is-hidden');
         iziToast.error({
             title: 'Error',
             message: 'Something went wrong...',
             position: 'topRight',
         })
+
+        
     };
 
     if(hits.length === 0) {
+        refs.loadMoreBtn.classList.add('is-hidden');
         iziToast.error({
             title: 'Error',
-            message: 'Something went wrong...',
+            message: 'Sorry, there are no images matching your search query. Please try again!',
             position: 'topRight',
         })
     };

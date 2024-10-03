@@ -44,6 +44,15 @@ async function handleSubmit(event) {
         if(totalHits > PER_PAGE) {
             refs.loadMoreBtn.classList.remove('is-hidden');
         }
+
+        if (currentPage >= Math.min(pages, 34)) {
+            refs.loadMoreBtn.classList.add('is-hidden');
+            iziToast.error({
+                title: 'Error',
+                message: 'We are sorry, but you have reached the end of search results.',
+                position: 'topRight',
+            })
+        }
         form.reset();
         lightbox.refresh();
 
@@ -51,7 +60,7 @@ async function handleSubmit(event) {
     catch (error) {
         iziToast.error({
             title: 'Error',
-            message: 'Something went wrong',
+            message: 'Sorry, there are no images matching your search query. Please try again!',
             position: 'topRight',
         })
     }
@@ -70,7 +79,7 @@ async function handleLoadMore() {
 
         lightbox.refresh();
         
-        if (currentPage >= Math.min(pages, 33)) {
+        if (currentPage >= Math.min(pages, 34)) {
             refs.loadMoreBtn.classList.add('is-hidden');
             iziToast.error({
                 title: 'Error',
