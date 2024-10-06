@@ -22,7 +22,7 @@ const refs = {
     searchBtn: document.querySelector('.js-search-btn'),
     loadMoreBtn: document.querySelector('.js-load-more-btn'),
     gallery: document.querySelector('.js-gallery'),
-    loader: document.getElementById('loader'),
+    loader: document.querySelector('.js-loader'),
 }; 
 
 refs.form.addEventListener('submit', handleSubmit);
@@ -89,7 +89,6 @@ async function handleLoadMore() {
     refs.loader.style.display = 'block';
     try {
         refs.loadMoreBtn.classList.remove('is-hidden');
-
         const { hits } = await fetchImages(searchQuery, currentPage); 
         appendImagesHits(hits, refs.gallery);
         handleScrollView();
@@ -98,6 +97,7 @@ async function handleLoadMore() {
         
         if (currentPage >= Math.min(pages, 34)) {
             refs.loadMoreBtn.classList.add('is-hidden');
+            refs.loader.style.display = 'none';
             iziToast.error({
                 title: 'Error',
                 message: 'We are sorry, but you have reached the end of search results.',
